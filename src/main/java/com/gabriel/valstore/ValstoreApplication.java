@@ -1,4 +1,4 @@
-package com.gabriel.valstore.valstore;
+package com.gabriel.valstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
