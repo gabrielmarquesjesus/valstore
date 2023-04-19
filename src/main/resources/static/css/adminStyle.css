@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #081017;
+    --secondary-color: #ff4554;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+.header {
+    display: flex;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    justify-content: center;
+}
+
+.header a{
+    position: absolute;
+    left: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.form-container {
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #fff;
+    max-width: 500px;
+    margin: auto;
+}
+
+.btn {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #881e27;
+}

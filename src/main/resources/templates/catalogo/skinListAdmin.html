@@ -14,7 +14,10 @@
     <div class="header">
         <div class="container">
             <h1>Valstore</h1>
-            <a th:href="@{/admin/loginAdmin}"><button>Gerenciar</button></a>
+            <div>
+                <a th:href="@{/skin/cadastroSkin}"><button>Nova Skin</button></a>
+                <a th:href="@{/skin/skinList}"><button>Sair</button></a>
+            </div>
         </div>
     </div>
 
@@ -58,7 +61,7 @@
                     </div>
                     <div class="card-footer">
                         <p th:text="${'VPS '+skin.valorantPoints}" class="card-text"></p>
-                        <a href="#" class="btn">Comprar</a>
+                        <a th:href="@{'/skin/editar/'+${skin.id}}" class="btn">Editar</a>
                     </div>
                 </div>
         </div>
