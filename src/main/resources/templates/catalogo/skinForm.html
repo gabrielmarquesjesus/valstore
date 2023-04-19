@@ -13,55 +13,60 @@
 
     <div class="container-fluid p-3">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6" th:object="${skin}">
                 <h1 class="text-center text-light mb-4">Cadastro de Skins de Valorant</h1>
                 <form method="post" enctype="multipart/form-data" th:action="@{/skin/salvarSkin}"
                     class="d-flex flex-column">
-                    <div class="mb-3">
-                        <input hidden type="text" class="form-control" name="id">
-                    </div>
+                    <input hidden type="text" class="form-control" id="id" name="id" th:value="${skin.id}">
                     <div class="mb-3">
                         <label for="nome" class="form-label text-light">Nome</label>
-                        <input type="text" class="form-control" name="nome" id="nome" required>
+                        <input type="text" class="form-control" name="nome" id="nome" th:value="${skin.nome}" required>
                     </div>
                     <div class="mb-3">
                         <label for="tipo" class="form-label text-light">Tipo</label>
                         <select class="form-select" name="tipo" id="tipo" required>
                             <option value="">Selecione um tipo</option>
-                            <option value=0>Pistola</option>
-                            <option value=1>Fuzil</option>
-                            <option value=2>Rifle</option>
-                            <option value=3>Faca</option>
-                            <option value=4>Sniper</option>
+                            <option value="0" th:selected="${skin.tipo == 0}">Pistola</option>
+                            <option value="1" th:selected="${skin.tipo == 1}">Fuzil</option>
+                            <option value="2" th:selected="${skin.tipo == 2}">Rifle</option>
+                            <option value="3" th:selected="${skin.tipo == 3}">Faca</option>
+                            <option value="4" th:selected="${skin.tipo == 4}">Sniper</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="raridade" class="form-label text-light">Raridade</label>
                         <select class="form-select" name="raridade" id="raridade" required>
                             <option value="">Selecione uma raridade</option>
-                            <option value=0>Comum</option>
-                            <option value=1>Incomum</option>
-                            <option value=2>Raro</option>
-                            <option value=3>Épico</option>
-                            <option value=4>Lendário</option>
+                            <option value="0" th:selected="${skin.raridade == 0}">Comum</option>
+                            <option value="1" th:selected="${skin.raridade == 1}">Incomum</option>
+                            <option value="2" th:selected="${skin.raridade == 2}">Raro</option>
+                            <option value="3" th:selected="${skin.raridade == 3}">Épico</option>
+                            <option value="4" th:selected="${skin.raridade == 4}">Lendário</option>
                         </select>
+
                     </div>
                     <div class="mb-3">
                         <label for="valorantPoints" class="form-label text-light">Valorant Points</label>
-                        <input type="number" class="form-control" name="valorantPoints" id="valorantPoints" required>
+                        <input type="number" class="form-control" name="valorantPoints" id="valorantPoints"
+                            th:value="${skin.valorantPoints}" required>
                     </div>
                     <div class="mb-3">
                         <label for="imagem" class="form-label text-light">Imagem</label>
-                        <input required type="file" class="form-control" name="imagem" id="imagem"
-                            accept=".jpg,.jpeg,.png,.gif">
+                        <input th:required="${skin.id == '' || skin.id == null}" type="file" class="form-control"
+                            name="imagem" id="imagem" accept=".jpg,.jpeg,.png,.gif">
                     </div>
+                    <input hidden type="text" class="form-control" id="urlImagem" name="urlImagem" th:value="${skin.urlImagem}">
                     <button style="background-color: #ff4554; color: white;" type="submit" class="btn">Salvar</button>
                 </form>
+                <p th:hidden="${skin.id == '' || skin.id == null}"
+                    style="color: white; text-decoration: underline; cursor: pointer; width: min-content;" th:onclick="deletar()">Remover
+                </p>
             </div>
             <div class="col-md-6">
                 <div style="border: 2px solid #ff4554;"
                     class="rounded h-100 d-flex justify-content-center align-items-center">
-                    <img id="preview" src="#" alt="Pré-visualização da imagem" style="width: 100%;">
+                    <img id="preview" th:src="@{|data:image/png;base64,${skin.urlImagem}|}"
+                        alt="Pré-visualização da imagem" style="width: 100%;">
                 </div>
             </div>
         </div>
@@ -77,6 +82,20 @@
         var imagem = document.getElementById('preview');
         imagem.src = URL.createObjectURL(input.files[0]);
         imagem.style.display = "block";
+    }
+
+    function deletar() {
+        var id = document.querySelector('#id').value;
+        if (confirm('Tem certeza que deseja deletar esta skin?')) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    window.open('/skin/skinListAdmin', '_self')
+                }
+            };
+            xhttp.open('DELETE', '/skin/delete/' + id);
+            xhttp.send();
+        }
     }
 </script>
 

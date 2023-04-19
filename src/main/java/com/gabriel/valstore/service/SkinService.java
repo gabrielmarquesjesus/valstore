@@ -20,7 +20,8 @@ public class SkinService {
     
     public void create(Skin skin) throws Exception{
         String base64 = Base64.getEncoder().encodeToString(skin.getImagem().getBytes());
-        skin.setUrlImagem(base64);
+        if(!StringUtils.isEmpty(base64))
+            skin.setUrlImagem(base64);
         skinDao.save(skin);
     }
 
@@ -34,5 +35,14 @@ public class SkinService {
         }
         return skinDao.findAll(sort);
     }
+
+    public Skin findById(Long id) throws Exception{
+        return skinDao.findById(id).get();
+    }
+
+    public void delete(Long id) throws Exception{
+        skinDao.deleteById(id);
+    }
+
 
 }
