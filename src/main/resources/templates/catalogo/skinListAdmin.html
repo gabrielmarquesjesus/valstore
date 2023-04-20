@@ -28,10 +28,10 @@
             <div class="col-md-4">
                 <select name="ordenacao" class="form-select" id="ordenacao" onchange="window.location.href=this.value">
                     <option hidden value="">Ordenar por:</option>
-                    <option th:value="@{/skin/skinList?sort=valorantPoints,DESC}">Mais caro</option>
-                    <option th:value="@{/skin/skinList?sort=valorantPoints,ASC}">Mais barato</option>
-                    <option th:value="@{/skin/skinList?sort=raridade,DESC}">Maior raridade</option>
-                    <option th:value="@{/skin/skinList?sort=raridade,ASC}">Menor raridade</option>
+                    <option th:value="@{/skin/skinListAdmin?sort=valorantPoints,DESC}">Mais caro</option>
+                    <option th:value="@{/skin/skinListAdmin?sort=valorantPoints,ASC}">Mais barato</option>
+                    <option th:value="@{/skin/skinListAdmin?sort=raridade,DESC}">Maior raridade</option>
+                    <option th:value="@{/skin/skinListAdmin?sort=raridade,ASC}">Menor raridade</option>
                 </select>
             </div>
         </div>
