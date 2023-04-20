@@ -46,7 +46,6 @@ public class AdminController {
             mv.addObject("aviso", "Administrador Inválido!");
             return mv; 
         }
-
     }
 
 
